@@ -5,7 +5,6 @@ pipeline {
         DOCKER_IMAGE = "ghaith6789/student-management:${env.BUILD_NUMBER}"
         SONAR_TOKEN = credentials('sonarqube_token')
 
-        
        
         // Noms dynamiques pour éviter les conflits
         ZAP_NETWORK = "zap-net-${env.BUILD_NUMBER}"
