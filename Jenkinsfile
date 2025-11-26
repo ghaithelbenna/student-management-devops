@@ -7,6 +7,7 @@ pipeline {
        
         // Noms dynamiques pour éviter les conflits
         ZAP_NETWORK = "zap-net-${env.BUILD_NUMBER}"
+        
         APP_CONTAINER = "app-test-${env.BUILD_NUMBER}"
     }
     stages {
