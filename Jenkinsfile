@@ -4,6 +4,7 @@ pipeline {
         DOCKER_CREDENTIALS = credentials('jenkins_docker')
         DOCKER_IMAGE = "ghaith6789/student-management:${env.BUILD_NUMBER}"
         SONAR_TOKEN = credentials('sonarqube_token')
+
         
        
         // Noms dynamiques pour éviter les conflits
