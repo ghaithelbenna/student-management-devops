@@ -6,7 +6,7 @@ pipeline {
         SONAR_TOKEN = credentials('sonarqube_token')
        
 
-       
+
         // Noms dynamiques pour éviter les conflits
         ZAP_NETWORK = "zap-net-${env.BUILD_NUMBER}"
         APP_CONTAINER = "app-test-${env.BUILD_NUMBER}"
@@ -27,7 +27,7 @@ pipeline {
                     sh 'chmod +x mvnw'
                     sh './mvnw clean test'
                 }
-                junit testResults: 'target/surefire-reports/*.xml', allowEmptyResults: true
+                junit testResults: 'student-man-main/target/surefire-reports/*.xml', allowEmptyResults: true
             }
         }
 
@@ -36,7 +36,7 @@ pipeline {
                 dir('student-man-main') {
                     sh './mvnw clean package -DskipTests'
                 }
-                archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'student-man-main/target/*.jar', allowEmptyArchive: true
             }
         }
 
@@ -45,7 +45,7 @@ pipeline {
                 dir('student-man-main') {
                     catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
                         withSonarQubeEnv('SonarQube') {
-                            sh './mvnw sonar:sonar -Dsonar.projectKey=devops_git -Dsonar.host.url=http://192.168.33.10:32000 -Dsonar.token=$SONAR_TOKEN || true'
+                            sh './mvnw sonar:sonar -Dsonar.projectKey=devops_git -Dsonar.host.url=http://192.168.33.10:32000 -Dsonar.token=$SONAR_TOKEN'
                         }
                     }
                 }
